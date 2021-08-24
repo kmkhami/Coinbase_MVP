@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AccountConnect from './components/AccountConnectButton.js'; 
-import logo from './logo.svg';
+import User from './components/User.js'; 
+import AccountConnectButton from './components/AccountConnectButton.js'; 
 import './App.css';
 
 function App() {
@@ -10,10 +10,10 @@ function App() {
       </header>
       <Router>
         <Switch>
-          <Route path = '/:code'> 
+          <Route path = '/user' component={User}> 
           </Route>  
           <Route path = '/'>
-          <AccountConnect />
+            <AccountConnectButton />
           </Route> 
         </Switch> 
       </Router>
