@@ -1,3 +1,6 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import User from './components/User.js'; 
+import AccountConnectButton from './components/AccountConnectButton.js'; 
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,8 +20,15 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <h1>{JSON.stringify(state)}</h1>
-      <button onClick={() => updateJSON( { id: 1, code: 123, public_key: 567 })}> UpdateJSON </button>
+      <Router>
+        <Switch>
+          <Route path = '/user' component={User}> 
+          </Route>  
+          <Route path = '/'>
+            <AccountConnectButton />
+          </Route> 
+        </Switch> 
+      </Router>
     </div>
   );
 }
