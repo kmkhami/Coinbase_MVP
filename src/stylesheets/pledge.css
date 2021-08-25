@@ -1,0 +1,27 @@
+.pledge {
+}
+
+.dropdown {
+  width: 30%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-select {
+  font-size: 28px;
+}
+
+.text-donate {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.input {
+  border-width: 0;
+  border-bottom-width: thin;
+  text-align: center;
+  font-size: 32px;
+  width: 100px;
+  margin-bottom: 15px;
+}

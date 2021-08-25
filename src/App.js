@@ -1,5 +1,6 @@
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
+import Pledge from './components/Pledge';
 
 function App() {
   return (
@@ -7,6 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+      <Pledge></Pledge>
     </div>
   );
 }
