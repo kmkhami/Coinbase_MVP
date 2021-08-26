@@ -1,7 +1,9 @@
 import '../stylesheets/pledge.css';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
-import { FcCurrencyExchange } from "react-icons/fc";
+import { Link } from 'react-router-dom'; 
+// import { FcCurrencyExchange } from "react-icons/fc";
+import { FaArrowCircleRight } from 'react-icons/fa'
 import axios from 'axios';
 
 function Pledge() {
@@ -22,6 +24,7 @@ function Pledge() {
     { value: 'BCH', label: 'Bitcoin Cash (BCH)'},
     { value: 'LINK', label: 'Chainlink (LINK)'},
   ]
+
   const updateCrypto = selectedCrypto => {
     setCrypto(selectedCrypto.value);
     axios.get(`https://api.coinbase.com/v2/exchange-rates?currency=${selectedCrypto.value}`)
@@ -39,17 +42,23 @@ function Pledge() {
   }, [currentRate, amount])
 
   return (
-    <div className='Pledge'>
-      <p className='text-select'>Select Your Crypto</p>
-      <Select className='dropdown' options={crypto_coins} onChange={updateCrypto}></Select>
-      <p className='text-donate'>Enter Donation Amount</p>
-      <div className='exchange'>
-        <input className='input' type='number' step='0.001' value={amount} onChange={(e) => setAmount(e.target.value)}></input>
-        {crypto}
-        <FcCurrencyExchange className="exchange-icon"></FcCurrencyExchange>
-        <br></br>
-        {convertedCrypto}
-        {'USD'}
+    <div clasName="pledge_box">
+      <div className='Pledge'>
+        <p className='text-select'>Select Your Crypto</p>
+        <Select className='dropdown' options={crypto_coins} onChange={updateCrypto}></Select>
+        <p className='text-donate'>Enter Donation Amount</p>
+        <div className='exchange'>
+          <input className='input' type='text' step='0.001' value={amount} onChange={(e) => setAmount(e.target.value)}></input>
+          <span className="currency">{crypto}</span>
+          {/* <FcCurrencyExchange className="exchange-icon"></FcCurrencyExchange> */}
+          <br></br>
+          <span className="converted_amount">{convertedCrypto + " USD"}</span> 
+        </div>
+        <div className="nav_box"> 
+          <Link to ="/request"> 
+            <button className="nav_button">Next <FaArrowCircleRight className="right_arrow"/></button>
+          </Link> 
+        </div> 
       </div>
     </div>
   );
