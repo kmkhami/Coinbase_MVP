@@ -35,3 +35,60 @@
 .exchange {
   /* display: flex; */
 }
+
+.currency {
+  padding-left: 10px; 
+}
+
+.Pledge {
+  width: 500px; 
+  margin: auto; 
+}
+
+.pledge_box {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  width: 100vw; 
+}
+
+.nav_box {
+  width: 100%; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px; 
+}
+
+.nav_box a {
+  width: 100%;
+}
+
+.nav_button {
+  margin-top: 2px; 
+  width: 100%; 
+  text-align: center;
+  padding: 5px; 
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px; 
+  background-color: rgb(78, 192, 175);
+  border: 1px solid #c0c0c0;
+  text-transform: uppercase;
+  color: #0D1912; 
+}
+
+.nav_button:hover {
+  color: white; 
+  cursor: pointer; 
+}
+
+.nav_button:active {
+  color: rgb(236, 236, 236); 
+  cursor: pointer; 
+}
+
+.right_arrow {
+  margin-bottom: -2px; 
+  padding-left: 5px; 
+}

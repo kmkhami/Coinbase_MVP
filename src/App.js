@@ -4,7 +4,7 @@ import Next from './components/Next.js';
 import AccountConnectButton from './components/AccountConnectButton.js';
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
-import Pledge from './components/Pledge';
+import Pledge from './components/Pledge.js';
 
 //We should use browser cookie instead of redux
 function App() {

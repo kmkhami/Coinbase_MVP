@@ -1,4 +1,5 @@
 import '../stylesheets/account_connect_button.css';
+import { FaArrowCircleRight } from 'react-icons/fa'
 
 function AccountConnect() {
   const coinbaseRedirect = () => {
@@ -9,7 +10,7 @@ function AccountConnect() {
 
   return (
     <div className="AccountConnect">
-      <button className="accountConnect" onClick={coinbaseRedirect}> Connect </button>
+      <button className="connect_button" onClick={coinbaseRedirect}> Sign in with coinbase <FaArrowCircleRight className="right_arrow"/> </button>
     </div>
   );
 }
