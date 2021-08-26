@@ -4,6 +4,7 @@ import Next from './components/Next.js';
 import AccountConnectButton from './components/AccountConnectButton.js';
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
+import Pledge from './components/Pledge';
 
 //We should use browser cookie instead of redux
 function App() {
@@ -17,6 +18,8 @@ function App() {
           <Route path = '/user' component={User}>
           </Route>
           <Route path = '/next' component={Next}>
+          </Route>
+          <Route path = '/pledge' component={Pledge}>
           </Route>
           <Route path = '/'>
             <AccountConnectButton />
