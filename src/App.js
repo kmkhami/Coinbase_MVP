@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import User from './components/User.js';
+import Next from './components/Next.js';
 import AccountConnectButton from './components/AccountConnectButton.js';
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
@@ -13,6 +14,8 @@ function App() {
       <Router>
         <Switch>
           <Route path = '/user' component={User}>
+          </Route>
+          <Route path = '/next' component={Next}>
           </Route>
           <Route path = '/'>
             <AccountConnectButton />

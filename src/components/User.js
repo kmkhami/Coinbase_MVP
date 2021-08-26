@@ -1,23 +1,21 @@
 import '../stylesheets/user.css';
 import QueryString from "query-string";
 import axios from 'axios';
+import { Redirect } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../store/index';
+import { useDispatch } from 'react-redux';
+import { set } from '../store/slices/userSlice'; 
 
 function User(props) {
     const params = QueryString.parse(props.location.search);
     const [isLoading, setLoading] = useState(true);
     const [isDispatchLoading, setDispatchLoading] = useState(true);
-    const [accessToken, setAccessToken] = useState(null);
 
-    const json = useSelector((state) => state.coinbase);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const updateJSON = async () => {
-            await bindActionCreators(actionCreators, dispatch);
+        const updateUser = async (payload) => {
+            dispatch(set(payload));
             setDispatchLoading(false); 
         }
 
@@ -34,27 +32,26 @@ function User(props) {
                 requestParams
             )
             .then(response => {
-                setAccessToken(response.data);
-                updateJSON(response.data);
+                updateUser(response.data);
                 setLoading(false);
             })
             .catch(function (error) {
-                setAccessToken("");
                 setLoading(false);
             });
         }
     }, [isDispatchLoading, params.code, dispatch]);
 
     if(isLoading) {
-        return <div className='App'>
-          <p> Loading </p>
-        </div>
+        return (
+            <div className='App'>
+            <p> Loading </p>
+            </div>
+        )
     }
 
     return (
         <div className="User">
-            {accessToken.access_token}
-            {console.log(json)}
+            <Redirect to="/next" />
         </div>
     );
 }
