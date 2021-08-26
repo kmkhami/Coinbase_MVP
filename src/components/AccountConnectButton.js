@@ -5,7 +5,7 @@ function AccountConnect() {
   const coinbaseRedirect = () => {
     window.location.href = "https://www.coinbase.com/oauth/authorize?response_type=code&client_id=" + 
                             process.env.REACT_APP_CLIENT_ID + "&redirect_uri=" + process.env.REACT_APP_REDIRECT_URI + 
-                            "&scope=wallet:user:read,wallet:accounts:read"
+                            "&scope=wallet:user:read,wallet:accounts:read,wallet:addresses:read,wallet:addresses:create,wallet:transactions:request"
   }
 
   return (

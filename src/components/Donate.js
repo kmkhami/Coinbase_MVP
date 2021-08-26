@@ -1,4 +1,5 @@
 import '../stylesheets/donate.css';
+import QueryString from "query-string";
 import {useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -7,46 +8,65 @@ function Donate(props) {
   const [id, setID] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [address, setAddress] = useState('');
+  const [isLoading, setIsLoading] = useState(true); 
+
+  const getCookie = (cName) => {
+    const name = cName + "=";
+    const cDecoded = decodeURIComponent(document.cookie); //to be careful
+    const cArr = cDecoded.split('; ');
+    let res; 
+    cArr.forEach(val => {
+      if (val.indexOf(name) === 0) {
+        console.log(val.substring(name.length)); 
+        res = val.substring(name.length);
+      }
+    })
+    return res; 
+  }
 
   useEffect(() => {
-    const token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('access_token='))
-    .split('=')[1];
-
+    const token = getCookie('access_token'); 
+    console.log(token); 
     setAccessToken(token);
-    const headers = {
+
+    const headersObj = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `Bearer ${token}`
     }
 
-    axios.get(`https://api.coinbase.com/v2/accounts/${props.crypto}`,
-    headers
-    )
+    axios.get(`https://api.coinbase.com/v2/accounts/BTC`, {
+      headers: headersObj
+    })
     .then(res => {
-      setID(res.data.data.id);
-      axios.post(`https://api.coinbase.com/v2/accounts/${id}/addresses`, headers)
-      .then( res => {
-        setAddress(res.data.data.address);
+      setID(res.data.data.id); 
+      axios.post(`https://api.coinbase.com/v2/accounts/${res.data.data.id}/addresses`, {}, {
+       headers: headersObj
       })
+      .then( res => {
+        console.log(res.data); 
+        setAddress(res.data.data.address);
+        setIsLoading(false); 
+      })
+    }); 
   }, [])
 
   const sendRequest = (event) => {
     event.preventDefault();
+    const params = QueryString.parse(props.location.search);
     const requestParams = {
       type: 'request',
       to: email,
-      amount: props.amount,
-      currency: props.currency
+      amount: params.amount,
+      currency: params.currency
     }
-    const headers = {
+    const headersObj = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${accessToken}`
     }
     axios.post(`https://api.coinbase.com/v2/accounts/${id}/transactions`,
-    requestParams,
-    headers
-    )
+      requestParams, {
+      headers: headersObj
+    })
       .then(res => {
         console.log(res);
         alert('Successful request');
@@ -54,6 +74,14 @@ function Donate(props) {
       .catch( e => {
         console.log(e);
       });
+  }
+
+  if(isLoading) {
+    return (
+      <div>
+        <span>Loading...</span>
+      </div>
+    )
   }
 
   return (

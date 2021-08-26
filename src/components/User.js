@@ -15,14 +15,14 @@ function User(props) {
         const updateUserCookie = (data) => {
             console.log('setting cookie');
             if(data.access_token != null) {
-                setCookie('acccess_token', data.access_token, { path: '/' });
+                setCookie('access_token', data.access_token, { path: '/' });
                 setCookie('token_type', data.token_type, { path: '/' });
                 setCookie('expires_in', data.expires_in, { path: '/' });
                 setCookie('refresh_token', data.refresh_token, { path: '/' });
                 setCookie('scope', data.scope, { path: '/' });
             }
             else {
-                setCookie('acccess_token', 'logged out', { path: '/' });
+                setCookie('access_token', 'logged out', { path: '/' });
             }
         }
 
