@@ -3,17 +3,17 @@ import QueryString from "query-string";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Redirect } from 'react-router-dom'; 
+import { Redirect } from 'react-router-dom';
 
 function User(props) {
     const params = QueryString.parse(props.location.search);
     const [isLoading, setLoading] = useState(true);
-    const [cookie, setCookie] = useCookies([]); 
+    const [cookie, setCookie] = useCookies([]);
 
     useEffect(() => {
 
         const updateUserCookie = (data) => {
-            console.log('setting cookie'); 
+            console.log('setting cookie');
             if(data.access_token != null) {
                 setCookie('acccess_token', data.access_token, { path: '/' });
                 setCookie('token_type', data.token_type, { path: '/' });
@@ -26,7 +26,6 @@ function User(props) {
             }
         }
 
-        
         const requestParams = {
             code: params.code,
             grant_type: 'authorization_code',
@@ -39,7 +38,7 @@ function User(props) {
             requestParams
         )
         .then(response => {
-            updateUserCookie(response.data); 
+            updateUserCookie(response.data);
             setLoading(false);
         })
         .catch(function (error) {

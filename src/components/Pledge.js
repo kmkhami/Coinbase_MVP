@@ -1,7 +1,7 @@
 import '../stylesheets/pledge.css';
 import Select from 'react-select';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 // import { FcCurrencyExchange } from "react-icons/fc";
 import { FaArrowCircleRight } from 'react-icons/fa'
 import axios from 'axios';
@@ -52,13 +52,13 @@ function Pledge() {
           <span className="currency">{crypto}</span>
           {/* <FcCurrencyExchange className="exchange-icon"></FcCurrencyExchange> */}
           <br></br>
-          <span className="converted_amount">{convertedCrypto + " USD"}</span> 
+          <span className="converted_amount">{convertedCrypto + " USD"}</span>
         </div>
-        <div className="nav_box"> 
-          <Link to ="/request"> 
+        <div className="nav_box">
+          <Link to ={"/donate?amount=" + amount + '&currency=' + crypto}>
             <button className="nav_button">Next <FaArrowCircleRight className="right_arrow"/></button>
-          </Link> 
-        </div> 
+          </Link>
+        </div>
       </div>
     </div>
   );
