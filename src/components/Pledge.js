@@ -55,7 +55,7 @@ function Pledge() {
           <span className="converted_amount">{convertedCrypto + " USD"}</span> 
         </div>
         <div className="nav_box"> 
-          <Link to ="/request"> 
+          <Link to="/request"> 
             <button className="nav_button">Next <FaArrowCircleRight className="right_arrow"/></button>
           </Link> 
         </div> 
