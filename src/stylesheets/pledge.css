@@ -25,3 +25,13 @@
   width: 100px;
   margin-bottom: 15px;
 }
+
+.exchange-icon {
+  height: 2em;
+  width: 50%;
+  display: block;
+}
+
+.exchange {
+  /* display: flex; */
+}
