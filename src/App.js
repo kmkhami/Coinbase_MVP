@@ -5,6 +5,7 @@ import AccountConnectButton from './components/AccountConnectButton.js';
 import logo from './assets/paymentspring_logo.svg';
 import './App.css';
 
+//We should use browser cookie instead of redux
 function App() {
   return (
     <div className="App">
