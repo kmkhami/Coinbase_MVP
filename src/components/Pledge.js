@@ -54,13 +54,8 @@ function Pledge() {
           <br></br>
           <span className="converted_amount">{convertedCrypto + " USD"}</span>
         </div>
-<<<<<<< HEAD
         <div className="nav_box">
           <Link to ={"/donate?amount=" + amount + '&currency=' + crypto}>
-=======
-        <div className="nav_box"> 
-          <Link to="/request"> 
->>>>>>> main
             <button className="nav_button">Next <FaArrowCircleRight className="right_arrow"/></button>
           </Link>
         </div>
