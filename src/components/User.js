@@ -3,30 +3,29 @@ import QueryString from "query-string";
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { Redirect } from 'react-router-dom'; 
+import { Redirect } from 'react-router-dom';
 
 function User(props) {
     const params = QueryString.parse(props.location.search);
     const [isLoading, setLoading] = useState(true);
-    const [cookie, setCookie] = useCookies([]); 
+    const [cookie, setCookie] = useCookies([]);
 
     useEffect(() => {
 
         const updateUserCookie = (data) => {
-            console.log('setting cookie'); 
+            console.log('setting cookie');
             if(data.access_token != null) {
-                setCookie('acccess_token', data.access_token, { path: '/' });
+                setCookie('access_token', data.access_token, { path: '/' });
                 setCookie('token_type', data.token_type, { path: '/' });
                 setCookie('expires_in', data.expires_in, { path: '/' });
                 setCookie('refresh_token', data.refresh_token, { path: '/' });
                 setCookie('scope', data.scope, { path: '/' });
             }
             else {
-                setCookie('acccess_token', 'logged out', { path: '/' });
+                setCookie('access_token', 'logged out', { path: '/' });
             }
         }
 
-        
         const requestParams = {
             code: params.code,
             grant_type: 'authorization_code',
@@ -39,7 +38,7 @@ function User(props) {
             requestParams
         )
         .then(response => {
-            updateUserCookie(response.data); 
+            updateUserCookie(response.data);
             setLoading(false);
         })
         .catch(function (error) {
