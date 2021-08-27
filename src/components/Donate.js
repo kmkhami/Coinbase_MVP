@@ -54,14 +54,15 @@ function Donate(props) {
     event.preventDefault();
     const params = QueryString.parse(props.location.search);
     const requestParams = {
-      type: 'request',
       to: email,
       amount: params.amount,
-      currency: params.currency
+      currency: params.currency,
+      type: 'request'
     }
     const headersObj = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `Bearer ${accessToken}`,
+      'type': 'request'
     }
     axios.post(`https://api.coinbase.com/v2/accounts/${id}/transactions`,
       requestParams, {
