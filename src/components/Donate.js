@@ -8,25 +8,27 @@ function Donate(props) {
   const [id, setID] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [address, setAddress] = useState('');
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const queryValues = QueryString.parse(props.location.search);
+  const amount = queryValues.amount;
 
   const getCookie = (cName) => {
     const name = cName + "=";
     const cDecoded = decodeURIComponent(document.cookie); //to be careful
     const cArr = cDecoded.split('; ');
-    let res; 
+    let res;
     cArr.forEach(val => {
       if (val.indexOf(name) === 0) {
-        console.log(val.substring(name.length)); 
+        console.log(val.substring(name.length));
         res = val.substring(name.length);
       }
     })
-    return res; 
+    return res;
   }
 
   useEffect(() => {
-    const token = getCookie('access_token'); 
-    console.log(token); 
+    const token = getCookie('access_token');
+    console.log(token);
     setAccessToken(token);
 
     const headersObj = {
@@ -38,16 +40,16 @@ function Donate(props) {
       headers: headersObj
     })
     .then(res => {
-      setID(res.data.data.id); 
+      setID(res.data.data.id);
       axios.post(`https://api.coinbase.com/v2/accounts/${res.data.data.id}/addresses`, {}, {
        headers: headersObj
       })
       .then( res => {
-        console.log(res.data); 
+        console.log(res.data);
         setAddress(res.data.data.address);
-        setIsLoading(false); 
+        setIsLoading(false);
       })
-    }); 
+    });
   }, [])
 
   const sendRequest = (event) => {
@@ -86,7 +88,7 @@ function Donate(props) {
 
   return (
     <div className='Donate'>
-      <p className='text-select'>Use the address below to donate <b>{props.amount} BTC</b> from your wallet</p>
+      <p className='text-select'>Use the address below to donate <b>{amount} BTC</b> from your wallet</p>
       <img src={'https://www.bitcoinqrcodemaker.com/api/?style=bitcoin&address=' + address} alt='QR Code'/>
       <p>Enter your email address below if you would like to make a coinbase request</p>
       <form onSubmit={sendRequest}>
